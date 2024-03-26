@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
 using TAF_ReportPortal.Configuration;
-
+ 
 namespace TAF_ReportPortal.Business
 {
     public class LoginPage
