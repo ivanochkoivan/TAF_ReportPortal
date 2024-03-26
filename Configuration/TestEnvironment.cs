@@ -25,8 +25,8 @@ namespace TAF_ReportPortal.Configuration
         private TestConfiguration InitializeConfiguration()
         {
             IConfiguration configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetParent(AppContext.BaseDirectory).FullName)
-                .AddJsonFile("Appsettings.json", false)
+                .SetBasePath(Path.Combine(Directory.GetParent(AppContext.BaseDirectory).FullName, "Configuration"))
+                .AddJsonFile("appsettings.json", false)
                 .Build();
 
             return configuration.Get<TestConfiguration>();

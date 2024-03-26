@@ -1,11 +1,14 @@
 ﻿using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
+using TAF_ReportPortal.Configuration;
 
 namespace TAF_ReportPortal.Business
 {
     public class LoginPage
     {
         private IWebDriver driver;
+
+        private string url = TestEnvironment.Instance.Config.UiTestConfig.UIHost;
 
         [FindsBy(How = How.XPath, Using = "//input[@placeholder=\"Login\"]")]
         private IWebElement loginField;
@@ -20,6 +23,11 @@ namespace TAF_ReportPortal.Business
         {
             this.driver = driver;
             PageFactory.InitElements(driver, this);
+        }
+
+        public void GoToLoginPage()
+        {
+            driver.Navigate().GoToUrl(url);
         }
 
         public void LoginWithData(string? login = null, string? password = null)

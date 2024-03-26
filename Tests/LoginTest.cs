@@ -1,19 +1,14 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TAF_ReportPortal.Business;
-using WebDriverManager.DriverConfigs.Impl;
-using NUnit;
 using NUnit.Framework;
 using TAF_ReportPortal.Configuration;
+using NUnit.Allure.Core;
 
 namespace TAF_ReportPortal.Tests
 {
-    [TestFixture]
+    [AllureNUnit]
+    //[TestFixture]
     public class LoginTest
     {
         private IWebDriver driver;
@@ -24,6 +19,7 @@ namespace TAF_ReportPortal.Tests
             loger.Log("Initiate driver");
             driver = new ChromeDriver();
             LoginPage loginPage = new LoginPage(driver);
+            loginPage.GoToLoginPage();
             loginPage.LoginWithData(TestEnvironment.Instance.Config.UiTestConfig.Login, TestEnvironment.Instance.Config.UiTestConfig.Password);
         }
     }
