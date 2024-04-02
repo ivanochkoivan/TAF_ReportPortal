@@ -22,8 +22,6 @@ namespace TAF_ReportPortal_Configuration
 
         private TestEnvironment() { 
             Config = InitializeConfiguration();
-            WebDriver = new ChromeDriver();
-            HttpClient = new HttpClient();
         }
 
         private TestConfiguration InitializeConfiguration()
@@ -65,7 +63,7 @@ namespace TAF_ReportPortal_Configuration
         public void After()
         {
             // teardown HttpClient and WebDriver
-            TestEnvironment.Instance.HttpClient?.Dispose();
+            //TestEnvironment.Instance.HttpClient?.Dispose();
 
             TestEnvironment.Instance.WebDriver?.Quit();
             TestEnvironment.Instance.WebDriver?.Dispose();
