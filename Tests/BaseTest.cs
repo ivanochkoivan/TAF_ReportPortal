@@ -38,7 +38,7 @@ namespace TAF_ReportPortal_Tests
             Logger.Log("SetUp");
             TestEnvironment.Instance.Before();
             WebDriver = TestEnvironment.Instance.WebDriver;
-            HttpClient = TestEnvironment.Instance.HttpClient;
+            //HttpClient = TestEnvironment.Instance.HttpClient;
         }
         [TearDown]
         public void BaseTearDown()
