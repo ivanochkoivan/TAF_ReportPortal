@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium;
+using TechTalk.SpecFlow;
 
 namespace TAF_ReportPortal_Configuration
 {
@@ -16,6 +17,16 @@ namespace TAF_ReportPortal_Configuration
         {
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
             wait.Until(driver => driver.FindElements(by).Count > 0);
+        }
+
+        public static Dictionary<string, string> ToDictionary(Table table)
+        {
+            var dictionary = new Dictionary<string, string>();
+            foreach (var row in table.Rows)
+            {
+                dictionary.Add(row[0], row[1]);
+            }
+            return dictionary;
         }
     }
 }
