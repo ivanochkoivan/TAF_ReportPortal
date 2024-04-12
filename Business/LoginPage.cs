@@ -5,10 +5,8 @@ using TAF_ReportPortal_Configuration;
 
 namespace TAF_ReportPortal_Business
 {
-    public class LoginPage
+    public class LoginPage : BasePage
     {
-        private IWebDriver driver;
-
         private string url = TestEnvironment.Instance.Config.UiTestConfig.UIHost;
 
         [FindsBy(How = How.XPath, Using = "//input[@placeholder=\"Login\"]")]
@@ -20,15 +18,17 @@ namespace TAF_ReportPortal_Business
         [FindsBy(How = How.XPath, Using = "//button[@type=\"submit\"]")]
         private IWebElement loginButton;
 
-        public LoginPage(IWebDriver driver)
-        {
-            this.driver = driver;
+        private string loginFieldXpath = "//input[@placeholder=\"Login\"]";
+
+        public LoginPage(IWebDriver driver) : base(driver)
+        {           
             PageFactory.InitElements(driver, this);
         }
 
         public void GoToLoginPage()
         {
             driver.Navigate().GoToUrl(url);
+            WaitingWhilePageIsLoading(loginFieldXpath);
         }
 
         public void LoginWithData(string? login = null, string? password = null)

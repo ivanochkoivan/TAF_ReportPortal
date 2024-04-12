@@ -1,11 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using TAF_ReportPortal_Business;
 using TAF_ReportPortal_Configuration;
 
-namespace TAF_ReportPortal_Tests
+namespace TAF_ReportPortal_Tests.MsTests
 {
     public class BaseTest
     {
@@ -31,16 +31,16 @@ namespace TAF_ReportPortal_Tests
             loginPage.LoginWithData(TestEnvironment.Instance.Config.UiTestConfig.Login, TestEnvironment.Instance.Config.UiTestConfig.Password);
         }
 
-        [SetUp]
+        [TestInitialize]
         public void BaseSetUp()
         {
             InitiateLogger();
             Logger.Log("SetUp");
             TestEnvironment.Instance.Before();
             WebDriver = TestEnvironment.Instance.WebDriver;
-            //HttpClient = TestEnvironment.Instance.HttpClient;
+            HttpClient = TestEnvironment.Instance.HttpClient;
         }
-        [TearDown]
+        [TestCleanup]
         public void BaseTearDown()
         {
             Logger.Log("TearDown");

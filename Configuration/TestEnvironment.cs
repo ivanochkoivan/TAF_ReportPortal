@@ -1,8 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using System.Reflection;
 using Microsoft.Extensions.Configuration;
-using NUnit.Framework;
 using TAF_ReportPortal_Configuration.Models;
 
 namespace TAF_ReportPortal_Configuration
@@ -20,7 +18,9 @@ namespace TAF_ReportPortal_Configuration
         public IWebDriver WebDriver { get; private set; }
         public TestConfiguration Config { get; }
 
-        private TestEnvironment() { Config = InitializeConfiguration(); }
+        private TestEnvironment() { 
+            Config = InitializeConfiguration();
+        }
 
         private TestConfiguration InitializeConfiguration()
         {
@@ -30,6 +30,11 @@ namespace TAF_ReportPortal_Configuration
                 .Build();
 
             return configuration.Get<TestConfiguration>();
+        }
+
+        public static TestEnvironment Create()
+        {
+            return new TestEnvironment();
         }
 
         public void InitializeHttpClient(HttpClient client)
@@ -42,23 +47,21 @@ namespace TAF_ReportPortal_Configuration
             WebDriver = driver;
         }
 
-        [SetUp]
         public void Before()
         {
             // setup HttpClient and WebDriver
-            var httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri(Config.ApiTestConfig.APIHost);
-            TestEnvironment.Instance.InitializeHttpClient(httpClient);
+            //var httpClient = new HttpClient();
+            //httpClient.BaseAddress = new Uri(Config.ApiTestConfig.APIHost);
+            //TestEnvironment.Instance.InitializeHttpClient(httpClient);
 
             var webDriver = new ChromeDriver();
             TestEnvironment.Instance.InitializeWebDriver(webDriver);
         }
 
-        [TearDown]
-        public void After(MethodInfo methodUnderTest)
+        public void After()
         {
             // teardown HttpClient and WebDriver
-            TestEnvironment.Instance.HttpClient?.Dispose();
+            //TestEnvironment.Instance.HttpClient?.Dispose();
 
             TestEnvironment.Instance.WebDriver?.Quit();
             TestEnvironment.Instance.WebDriver?.Dispose();
