@@ -1,8 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using System.Reflection;
 using Microsoft.Extensions.Configuration;
-using NUnit.Framework;
 using TAF_ReportPortal_Configuration.Models;
 
 namespace TAF_ReportPortal_Configuration

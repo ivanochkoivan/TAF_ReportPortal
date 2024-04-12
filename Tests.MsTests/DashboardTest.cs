@@ -1,9 +1,5 @@
-﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using TAF_ReportPortal_Business;
-using Microsoft.Extensions.Logging;
+﻿using TAF_ReportPortal_Business;
 using TAF_ReportPortal_Configuration;
-using TAF_ReportPortal_Tests.MsTests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TAF_ReportPortal_Tests.MsTests
@@ -20,11 +16,8 @@ namespace TAF_ReportPortal_Tests.MsTests
         [DataRow("AA", "ShortDescription", false)]
         public void CreateDashboardFeature(string name, string description, bool expectedResult)
         {
-            try
-            {
-                Login();
-                Logger.Log("Successful login");
-            } catch (Exception ex) { Logger.LogError("LoginFailed", ex); }
+            Login();
+            Logger.Log("Successful login");
 
             Menu menu = new Menu(WebDriver);
             menu.GoToDashboardPage();
@@ -44,12 +37,8 @@ namespace TAF_ReportPortal_Tests.MsTests
         [DataRow("1", false)]
         public void SearchDashboardFeature(string filter, bool expectedResult)
         {
-            try
-            {
-                Login();
-                Logger.Log("Successful login");
-            }
-            catch (Exception ex) { Logger.LogError("LoginFailed", ex); }
+            Login();
+            Logger.Log("Successful login");
 
             Menu menu = new Menu(WebDriver);
             menu.GoToDashboardPage();
@@ -69,12 +58,8 @@ namespace TAF_ReportPortal_Tests.MsTests
         [DataRow("existingName", "UpdatedDescription", false)]
         public void UpdateDashboardFeature(string name, string description, bool expectedResult)
         {
-            try
-            {
-                Login();
-                Logger.Log("Successful login");
-            }
-            catch (Exception ex) { Logger.LogError("LoginFailed", ex); }
+            Login();
+            Logger.Log("Successful login");
 
             Menu menu = new Menu(WebDriver);
             menu.GoToDashboardPage();
