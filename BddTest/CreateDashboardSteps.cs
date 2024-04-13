@@ -36,15 +36,18 @@ namespace TAF_ReportPortal_Tests.MsTests
         public void ThenADashboardWasCreated()
         {
             var expectedResult = true;
-            AllDashboards allDashboards = ScenarioContext["allDashboards"] as AllDashboards;
-            Assert.That(allDashboards.CheckIfDashboardWasCreated(), Is.EqualTo(expectedResult));
-            Logger.Log($"Assertion for dashboard creation passed. Expected: {expectedResult}");
+            CheckThatDashboardCreation(expectedResult);
         }
 
         [Then("a dashboard wasn`t created")]
         public void ThenADashboardWasntCreated()
         {
             var expectedResult = false;
+            CheckThatDashboardCreation(expectedResult);
+        }
+
+        private void CheckThatDashboardCreation(bool expectedResult)
+        {
             AllDashboards allDashboards = ScenarioContext["allDashboards"] as AllDashboards;
             Assert.That(allDashboards.CheckIfDashboardWasCreated(), Is.EqualTo(expectedResult));
             Logger.Log($"Assertion for dashboard creation passed. Expected: {expectedResult}");
