@@ -3,7 +3,8 @@ using TAF_ReportPortal_Business;
 using TAF_ReportPortal_Configuration;
 using TechTalk.SpecFlow;
 
-namespace TAF_ReportPortal_Tests.MsTests
+[assembly: Parallelizable(ParallelScope.Fixtures)]
+namespace TAF_ReportPortal_BddTest
 {
     [Binding]
     public class SearchDashboardSteps : BaseStep

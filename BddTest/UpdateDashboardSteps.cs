@@ -3,7 +3,7 @@ using TAF_ReportPortal_Business;
 using TAF_ReportPortal_Configuration;
 using TechTalk.SpecFlow;
 
-namespace TAF_ReportPortal_Tests.MsTests
+namespace TAF_ReportPortal_BddTest
 {
     [Binding]
     public class UpdateDashboardSteps : BaseStep

@@ -9,34 +9,38 @@ namespace TAF_ReportPortal_BddTest
     [Binding]
     public sealed class Hooks
     {
+        private ScenarioContext scenarioContext;
+        public Hooks(ScenarioContext scenarioContext) { 
+            this.scenarioContext = scenarioContext;
+        }
 
         [BeforeScenario]
-        public static void BaseSetUp()
+        public void BaseSetUp()
         {
             Logger Log = InitiateLogger();
             Log.Log("SetUp");
-            ScenarioContext.Current["Logger"] = Log;
+            scenarioContext["Logger"] = Log;
 
             TestEnvironment.Instance.Before();
             var Driver = TestEnvironment.Instance.WebDriver;
-            ScenarioContext.Current["WebDriver"] = Driver;
+            scenarioContext["WebDriver"] = Driver;
 
             //For future impelementation
             //HttpClient = TestEnvironment.Instance.HttpClient;
         }
 
         [AfterScenario]
-        public static void BaseTearDown()
+        public void BaseTearDown()
         {
-            ScenarioContext.Current.Get<Logger>("Logger").Log("TearDown");
+            (scenarioContext["Logger"] as Logger).Log("TearDown");
 
-            ScenarioContext.Current.Remove("WebDriver");
-            ScenarioContext.Current.Remove("Logger");
+            scenarioContext.Remove("WebDriver");
+            scenarioContext.Remove("Logger");
             
             TestEnvironment.Instance.After();
         }
 
-        public static Logger InitiateLogger()
+        public Logger InitiateLogger()
         {
             var serviceProvider = new ServiceCollection()
                 .AddLogging(builder => builder.AddConsole())
