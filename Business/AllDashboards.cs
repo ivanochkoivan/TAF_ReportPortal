@@ -7,19 +7,12 @@ namespace TAF_ReportPortal_Business
 {
     public class AllDashboards : BasePage
     {
-        [FindsBy(How = How.XPath, Using = "//span[contains(text(), 'Add New Dashboard')]")]
-        private IWebElement addNewDashboardButton;
+        private IWebElement addNewDashboardButton => driver.FindElement(By.XPath("//span[contains(text(), 'Add New Dashboard')]"));
+        private IWebElement findByNameField => driver.FindElement(By.XPath("//input[@placeholder='Search by name']"));
+        private IList<IWebElement> existingDashboards => driver.FindElements(By.XPath("//div[contains(@class, 'grid__grid')]/div[contains(@class, 'gridRow')]"));
+        private IWebElement updateFirstElementButton => driver.FindElement(By.XPath("//i[contains(@class, 'pencil')][1]"));
 
-        [FindsBy(How = How.XPath, Using = "//input[@placeholder='Search by name']")]
-        private IWebElement findByNameField;
-
-        [FindsBy(How = How.XPath, Using = "//div[contains(@class, 'grid__grid')]/div[contains(@class, 'gridRow')]")]
-        private IList<IWebElement> existingDashboards;
-
-        [FindsBy(How = How.XPath, Using = "//i[contains(@class, 'pencil')][1]")]
-        private IWebElement updateFirstElementButton;
-
-        private string addNewDashboardButtonXpath = "//span[contains(text(), 'Add New Dashboard')]";
+        //private string addNewDashboardButtonXpath = "//span[contains(text(), 'Add New Dashboard')]";
         private string nameFieldXpath = "//input[@placeholder='Enter dashboard name']";
         private string descriptionFieldXpath = "//textarea[@placeholder='Enter dashboard description']";
         private string addDashboardButtonXpath = "//button[text()='Add']";
@@ -31,7 +24,6 @@ namespace TAF_ReportPortal_Business
         public AllDashboards(IWebDriver driver) : base(driver)
         {
             WaitingWhilePageIsLoading(existingDashboardsXpath);
-            PageFactory.InitElements(driver, this);
         }
 
         public void CreateNewDashboard(string name, string description)

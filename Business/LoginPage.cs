@@ -9,20 +9,16 @@ namespace TAF_ReportPortal_Business
     {
         private string url = TestEnvironment.Instance.Config.UiTestConfig.UIHost;
 
-        [FindsBy(How = How.XPath, Using = "//input[@placeholder=\"Login\"]")]
-        private IWebElement loginField;
+        private IWebElement loginField => driver.FindElement(By.XPath("//input[@placeholder='Login']"));
 
-        [FindsBy(How = How.XPath, Using = "//input[@placeholder=\"Password\"]")]
-        private IWebElement passwordField;
+        private IWebElement passwordField => driver.FindElement(By.XPath("//input[@placeholder='Password']"));
 
-        [FindsBy(How = How.XPath, Using = "//button[@type=\"submit\"]")]
-        private IWebElement loginButton;
+        private IWebElement loginButton => driver.FindElement(By.XPath("//button[@type='submit']"));
 
         private string loginFieldXpath = "//input[@placeholder=\"Login\"]";
 
         public LoginPage(IWebDriver driver) : base(driver)
         {           
-            PageFactory.InitElements(driver, this);
         }
 
         public void GoToLoginPage()
@@ -31,7 +27,7 @@ namespace TAF_ReportPortal_Business
             WaitingWhilePageIsLoading(loginFieldXpath);
         }
 
-        public void LoginWithData(string? login = null, string? password = null)
+        public void LoginWithData(string login = null, string password = null)
         {
             loginField.SendKeys(login);
             passwordField.SendKeys(password);
