@@ -19,7 +19,6 @@ namespace TAF_ReportPortal_Business
 
         public LoginPage(IWebDriver driver) : base(driver)
         {           
-            PageFactory.InitElements(driver, this);
         }
 
         public void GoToLoginPage()
