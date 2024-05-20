@@ -36,9 +36,8 @@ namespace TAF_ReportPortal_Tests.MsTests
         {
             InitiateLogger();
             Logger.Log("SetUp");
-            TestEnvironment.Instance.Before();
+            TestEnvironment.Instance.BeforeUiTests();
             WebDriver = TestEnvironment.Instance.WebDriver;
-            HttpClient = TestEnvironment.Instance.HttpClient;
         }
         [TestCleanup]
         public void BaseTearDown()

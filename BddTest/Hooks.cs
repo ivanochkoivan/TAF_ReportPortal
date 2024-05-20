@@ -21,7 +21,7 @@ namespace TAF_ReportPortal_BddTest
             Log.Log("SetUp");
             scenarioContext["Logger"] = Log;
 
-            TestEnvironment.Instance.Before();
+            TestEnvironment.Instance.BeforeUiTests();
             var Driver = TestEnvironment.Instance.WebDriver;
             scenarioContext["WebDriver"] = Driver;
 

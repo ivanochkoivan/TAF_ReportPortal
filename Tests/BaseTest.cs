@@ -13,17 +13,6 @@ namespace TAF_ReportPortal_Tests
         protected IWebDriver WebDriver { get; private set; }
         protected HttpClient HttpClient { get; private set; }
 
-        public void InitiateLogger()
-        {
-            var serviceProvider = new ServiceCollection()
-                .AddLogging(builder => builder.AddConsole())
-                .BuildServiceProvider();
-
-            var factory = serviceProvider.GetService<ILoggerFactory>();
-
-            Logger = new Logger(factory.CreateLogger<Logger>());
-        }
-
         public void Login()
         {
             LoginPage loginPage = new LoginPage(WebDriver);
@@ -34,11 +23,10 @@ namespace TAF_ReportPortal_Tests
         [SetUp]
         public void BaseSetUp()
         {
-            InitiateLogger();
+            Logger = TestEnvironment.Instance.Logger;
             Logger.Log("SetUp");
-            TestEnvironment.Instance.Before();
-            WebDriver = TestEnvironment.Instance.WebDriver;
-            //HttpClient = TestEnvironment.Instance.HttpClient;
+            TestEnvironment.Instance.BeforeUiTests();
+            WebDriver = TestEnvironment.Instance.WebDriver;            
         }
         [TearDown]
         public void BaseTearDown()
