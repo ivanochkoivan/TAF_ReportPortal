@@ -2,6 +2,10 @@
 using OpenQA.Selenium.Chrome;
 using Microsoft.Extensions.Configuration;
 using TAF_ReportPortal_Configuration.Models;
+using System.Configuration;
+using TechTalk.SpecFlow.Assist;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace TAF_ReportPortal_Configuration
 {
@@ -14,9 +18,10 @@ namespace TAF_ReportPortal_Configuration
             get { return instance.Value; }
         }
 
-        public HttpClient HttpClient { get; private set; }
+        public IApiClient ApiClient { get; private set; }
         public IWebDriver WebDriver { get; private set; }
         public TestConfiguration Config { get; }
+        public Logger Logger { get; private set; }
 
         private TestEnvironment() { 
             Config = InitializeConfiguration();
@@ -24,12 +29,17 @@ namespace TAF_ReportPortal_Configuration
 
         private TestConfiguration InitializeConfiguration()
         {
-            IConfiguration configuration = new ConfigurationBuilder()
+            IConfiguration configuration = ReadConfig();
+
+            return configuration.Get<TestConfiguration>();
+        }
+
+        public IConfiguration ReadConfig()
+        {
+            return new ConfigurationBuilder()
                 .SetBasePath(Path.Combine(Directory.GetParent(AppContext.BaseDirectory).FullName, "..", "..", "..", "..", "Configuration", "bin", "Debug", "net8.0"))
                 .AddJsonFile("appsettings.json", false)
                 .Build();
-
-            return configuration.Get<TestConfiguration>();
         }
 
         public static TestEnvironment Create()
@@ -37,25 +47,48 @@ namespace TAF_ReportPortal_Configuration
             return new TestEnvironment();
         }
 
-        public void InitializeHttpClient(HttpClient client)
-        {
-            HttpClient = client;
-        }
-
         public void InitializeWebDriver(IWebDriver driver)
         {
             WebDriver = driver;
         }
 
-        public void Before()
+        public void InitiateLogger()
         {
-            // setup HttpClient and WebDriver
-            //var httpClient = new HttpClient();
-            //httpClient.BaseAddress = new Uri(Config.ApiTestConfig.APIHost);
-            //TestEnvironment.Instance.InitializeHttpClient(httpClient);
+            var serviceProvider = new ServiceCollection()
+                .AddLogging(builder => builder.AddConsole())
+                .BuildServiceProvider();
 
+            var factory = serviceProvider.GetService<ILoggerFactory>();
+
+            Logger = new Logger(factory.CreateLogger<Logger>());
+        }
+
+        public void BeforeUiTests()
+        {
+            InitiateLogger();
             var webDriver = new ChromeDriver();
-            TestEnvironment.Instance.InitializeWebDriver(webDriver);
+            TestEnvironment.Instance.InitializeWebDriver(webDriver);       
+        }
+
+        public void BeforeApiTests()
+        {
+            InitiateLogger();
+            var services = new ServiceCollection();
+
+            string apiClient = Config.APIClient;
+
+            if (apiClient == "HttpClient")
+            {
+                services.AddTransient<IApiClient, HttpClientApi>();
+            }
+            else if (apiClient == "RestClient")
+            {
+                services.AddTransient<IApiClient, RestSharpApiClient>();
+            }
+
+            var serviceProvider = services.BuildServiceProvider();
+
+            ApiClient = serviceProvider.GetService<IApiClient>();
         }
 
         public void After()
