@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using TAF_ReportPortal_Business;
 using TAF_ReportPortal_Configuration;
+using TAF_ReportPortal_Configuration.Utilities;
 using TechTalk.SpecFlow;
 
 namespace TAF_ReportPortal_BddTest
