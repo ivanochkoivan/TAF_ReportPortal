@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 using TAF_ReportPortal_Configuration;
@@ -69,5 +70,46 @@ public class CustomWebElement
     private void Log(string message)
     {
         TestEnvironment.Instance.Logger.Log(message);
+    }
+
+    public void DragAndDropTo(CustomWebElement target)
+    {
+        Actions actions = new Actions(_driver);
+        actions.DragAndDrop(_element, target._element).Perform();
+    }
+
+    public void ResizeElement(int xOffset, int yOffset)
+    {
+        Actions actions = new Actions(_driver);
+        actions.ClickAndHold(_element)
+               .MoveByOffset(xOffset, yOffset)
+               .Release()
+               .Perform();
+    }
+
+    public void ScrollToElement()
+    {
+        IJavaScriptExecutor js = (IJavaScriptExecutor)_driver;
+        js.ExecuteScript("arguments[0].scrollIntoView(true);", _element);
+    }
+
+    public bool IsElementInView()
+    {
+        IJavaScriptExecutor js = (IJavaScriptExecutor)_driver;
+        return (bool)js.ExecuteScript(
+            "var rect = arguments[0].getBoundingClientRect();" +
+            "return (" +
+            "rect.top >= 0 &&" +
+            "rect.left >= 0 &&" +
+            "rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&" +
+            "rect.right <= (window.innerWidth || document.documentElement.clientWidth));",
+            _element
+        );
+    }
+
+    public void ClickUsingJs()
+    {
+        IJavaScriptExecutor js = (IJavaScriptExecutor)_driver;
+        js.ExecuteScript("arguments[0].click();", _element);
     }
 }
