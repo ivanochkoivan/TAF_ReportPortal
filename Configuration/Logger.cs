@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using TAF_ReportPortal_Configuration.Utilities;
 
 namespace TAF_ReportPortal_Configuration
 {
