@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
-using TAF_ReportPortal_Business;
 using TAF_ReportPortal_Configuration;
 
 namespace TAF_ReportPortal_Tests_UiTestsWithAdvancedFeatures
@@ -10,19 +9,23 @@ namespace TAF_ReportPortal_Tests_UiTestsWithAdvancedFeatures
         protected Logger Logger { get; private set; }
         protected IWebDriver WebDriver { get; private set; }
 
-        public void Login()
+        public void LoginWithValidCredentials()
         {
-            LoginPage loginPage = new LoginPage(WebDriver);
-            loginPage.GoToLoginPage();
-            loginPage.LoginWithData(TestEnvironment.Instance.Config.UiTestConfig.Login, TestEnvironment.Instance.Config.UiTestConfig.Password);
+            LoginPage _loginPage = new LoginPage(TestEnvironment.Instance.WebDriver);
+            _loginPage.GoToLoginPage();
+            _loginPage.EnterUsername(TestEnvironment.Instance.Config.UiTestConfig.Login);
+            _loginPage.EnterPassword(TestEnvironment.Instance.Config.UiTestConfig.Password);
+            _loginPage.ClickLoginButton();
+            
+
         }
 
         [SetUp]
         public void BaseSetUp()
         {
-            Logger = TestEnvironment.Instance.Logger;
-            Logger.Log("SetUp");
             TestEnvironment.Instance.BeforeUiTests();
+            Logger = TestEnvironment.Instance.Logger;
+            Logger.Log("SetUp");            
             WebDriver = TestEnvironment.Instance.WebDriver;
         }
         [TearDown]

@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Business\TAF_ReportPortal_Business.csproj" />
+    <ProjectReference Include="..\Business.AdvancedFeature\TAF_ReportPortal_Business.AdvancedFeature.csproj" />
     <ProjectReference Include="..\Configuration\TAF_ReportPortal_Configuration.csproj" />
   </ItemGroup>
 
