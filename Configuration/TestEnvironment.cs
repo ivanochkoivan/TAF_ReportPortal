@@ -6,6 +6,7 @@ using System.Configuration;
 using TechTalk.SpecFlow.Assist;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using OpenQA.Selenium.Remote;
 
 namespace TAF_ReportPortal_Configuration
 {
@@ -73,9 +74,23 @@ namespace TAF_ReportPortal_Configuration
         public void BeforeUiTests()
         {
             InitiateLogger();
-            var webDriver = new ChromeDriver();
-            TestEnvironment.Instance.InitializeWebDriver(webDriver);
-            webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);
+            //var webDriver = new ChromeDriver();
+
+            var browserOptions = new ChromeOptions();
+            browserOptions.PlatformName = "Windows 11";
+            browserOptions.BrowserVersion = "latest";
+            var sauceOptions = new Dictionary<string, object>();
+            sauceOptions.Add("username", "oauth-rivalkonstyan-1a303");
+            sauceOptions.Add("accessKey", "528be141-5718-46b8-a0e5-ac2b9891cd8c");
+            sauceOptions.Add("build", "selenium-build-GU857");
+            sauceOptions.Add("name", "<your test name>");
+            browserOptions.AddAdditionalOption("sauce:options", sauceOptions);
+
+            var uri = new Uri("https://ondemand.eu-central-1.saucelabs.com:443/wd/hub");
+            var driver = new RemoteWebDriver(uri, browserOptions);
+
+            TestEnvironment.Instance.InitializeWebDriver(driver);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);
         }
 
         public void BeforeApiTests()
