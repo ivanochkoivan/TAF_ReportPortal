@@ -17,7 +17,6 @@ namespace TAF_ReportPortal_Tests_UiTestsWithAdvancedFeatures
             _loginPage.EnterPassword(TestEnvironment.Instance.Config.UiTestConfig.Password);
             _loginPage.ClickLoginButton();
             WebDriver.Manage().Window.Maximize();
-
         }
 
         [SetUp]
@@ -25,13 +24,28 @@ namespace TAF_ReportPortal_Tests_UiTestsWithAdvancedFeatures
         {
             TestEnvironment.Instance.BeforeUiTests();
             Logger = TestEnvironment.Instance.Logger;
-            Logger.Log("SetUp");            
+            Logger.Log("SetUp");
             WebDriver = TestEnvironment.Instance.WebDriver;
             LoginWithValidCredentials();
         }
+
         [TearDown]
         public void BaseTearDown()
         {
+            bool testFailed = TestContext.CurrentContext.Result.Outcome.Status == NUnit.Framework.Interfaces.TestStatus.Failed;
+            if (testFailed)
+            {
+                try
+                {
+                    var screenshotName = $"{TestContext.CurrentContext.Test.Name}_{DateTime.Now:yyyyMMdd_HHmmss}";
+                    TestEnvironment.Instance.ScreenshotTaker.TakeScreenshot(screenshotName);
+                }
+                catch (Exception ex)
+                {
+                    Logger.Log($"Failed to take screenshot: {ex.Message}");
+                }
+            }
+
             Logger.Log("TearDown");
             TestEnvironment.Instance.After();
         }

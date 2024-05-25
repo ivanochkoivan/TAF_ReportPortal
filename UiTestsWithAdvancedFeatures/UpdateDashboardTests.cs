@@ -49,6 +49,7 @@ namespace TAF_ReportPortal_Tests_UiTestsWithAdvancedFeatures
             string dashboardDescriptionUpdated = $"{dashboardDescription}";
 
             _dashboardPage.UpdateDashboard(dashboardNameUpdated, dashboardDescriptionUpdated, dashboardName);
+
             Assert.That(_dashboardPage.IsDashboardPresent(dashboardNameUpdated), Is.False, "Dashboard was not updated.");
         }
     }
