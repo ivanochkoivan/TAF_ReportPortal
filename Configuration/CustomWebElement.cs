@@ -19,6 +19,7 @@ public class CustomWebElement
 
     private void InitializeElement()
     {
+        WaitUntilVisible(5);
         _element = _driver.FindElement(_locator);
     }
 
@@ -53,6 +54,12 @@ public class CustomWebElement
     {
         WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(timeoutInSeconds));
         wait.Until(ExpectedConditions.ElementToBeClickable(_locator));
+    }
+
+    public void WaitUntilInvisible(int timeoutInSeconds)
+    {
+        WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(timeoutInSeconds));
+        wait.Until(ExpectedConditions.InvisibilityOfElementLocated(_locator));
     }
 
     public void FluentWaitUntilVisible(int timeoutInSeconds, int pollingIntervalInMilliseconds)

@@ -16,7 +16,7 @@ namespace TAF_ReportPortal_Tests_UiTestsWithAdvancedFeatures
             _loginPage.EnterUsername(TestEnvironment.Instance.Config.UiTestConfig.Login);
             _loginPage.EnterPassword(TestEnvironment.Instance.Config.UiTestConfig.Password);
             _loginPage.ClickLoginButton();
-            
+            WebDriver.Manage().Window.Maximize();
 
         }
 
@@ -27,6 +27,7 @@ namespace TAF_ReportPortal_Tests_UiTestsWithAdvancedFeatures
             Logger = TestEnvironment.Instance.Logger;
             Logger.Log("SetUp");            
             WebDriver = TestEnvironment.Instance.WebDriver;
+            LoginWithValidCredentials();
         }
         [TearDown]
         public void BaseTearDown()
