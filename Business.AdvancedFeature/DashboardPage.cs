@@ -1,81 +1,94 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Support;
+using OpenQA.Selenium.Interactions;
 
-public class DashboardPage
+namespace TAF_ReportPortal_Business.AdvancedFeature
 {
-    private IWebDriver _driver;
-
-    public DashboardPage(IWebDriver driver)
+    public class DashboardPage
     {
-        _driver = driver;
-    }
+        private IWebDriver _driver;
 
-
-    private CustomWebElement _dashboardMenu => new CustomWebElement(_driver, By.XPath("//div[contains(@class, \"sidebar__top-block\")]/div[1]"));
-
-    private CustomWebElement _addNewDashboardButton => new CustomWebElement(_driver, By.XPath("//span[contains(text(), 'Add New Dashboard')]"));
-
-    private CustomWebElement _nameField => new CustomWebElement(_driver, By.XPath("//input[@placeholder='Enter dashboard name']"));
-    private CustomWebElement _descriptionField => new CustomWebElement(_driver, By.XPath("//textarea[@placeholder='Enter dashboard description']"));
-
-    private CustomWebElement _addButton => new CustomWebElement(_driver, By.XPath("//button[text()='Add']"));
-
-
-    public void GoToDashboards()
-    {
-        _dashboardMenu.Click();
-    }
-
-
-    public void ClickAddNewDashboard()
-    {
-        _addNewDashboardButton.Click();
-    }
-
-
-    public void EnterDashboardDetails(string name, string description)
-    {
-        _nameField.SendKeys(name);
-        _descriptionField.SendKeys(description);
-    }
-
-
-    public void ConfirmAddition()
-    {
-        _addButton.Click();
-    }
-
-
-    public bool IsDashboardPresent(string name)
-    {
-        return _driver.FindElements(By.XPath($"//a[text() = '{name}']")).Count > 0;
-    }
-
-    public void DeleteDashboard(string dashboardName)
-    {
-        CustomWebElement dashboard = new CustomWebElement(_driver, By.XPath($"(//a[text() = '{dashboardName}'])[2]"));
-        var deleteButton = new CustomWebElement(_driver, By.XPath($"//a[text()='{dashboardName}']/following-sibling::div//i[contains(@class, 'delete')]"));
-        deleteButton.ScrollToElement();
-        deleteButton.Click();
-
-        var confirmDeleteButton = new CustomWebElement(_driver, By.XPath("//button[text()='Delete']"));
-        confirmDeleteButton.ClickUsingJs();
-        
-        dashboard.WaitUntilInvisible(5);
-    }
-
-    public void AddNewDashboard(string name, string description)
-    {
-        ClickAddNewDashboard();
-        EnterDashboardDetails(name, description);
-        ConfirmAddition();
-    }
-
-    public void DeleteDashboardIfPresent(string name)
-    {
-        if (IsDashboardPresent(name))
+        public DashboardPage(IWebDriver driver)
         {
-            DeleteDashboard(name);
+            _driver = driver;
+        }
+
+        private CustomWebElement _addNewWidgetButton => new CustomWebElement(_driver, By.XPath("//span[text()='Add new widget']"));
+        private CustomWebElement _overallStatisticsOption => new CustomWebElement(_driver, By.XPath("//div[text()='Overall statistics']"));
+        private CustomWebElement _nextStepButton => new CustomWebElement(_driver, By.XPath("//span[text()='Next step']"));
+        private CustomWebElement _demoFilterOption => new CustomWebElement(_driver, By.XPath("//span[text()='DEMO_FILTER']"));
+        private CustomWebElement _addButton => new CustomWebElement(_driver, By.XPath("//button[text()='Add']"));
+        private CustomWebElement _widgetName => new CustomWebElement(_driver, By.XPath("//input[@placeholder='Enter widget name']"));
+        private CustomWebElement _firstWidget => new CustomWebElement(_driver, By.XPath("(//div[contains(@class,'widgetHeader__info')])[1]"));
+        private CustomWebElement _secondWidget => new CustomWebElement(_driver, By.XPath("(//div[contains(@class,'widgetHeader__info')])[2]"));
+
+        private CustomWebElement _deleteWidgetButton => new CustomWebElement(_driver, By.XPath("//div[contains(@class, 'widget__common-control')]/div/div[3]"));
+        private CustomWebElement _confirmDeleteButton => new CustomWebElement(_driver, By.XPath("//button[text()='Delete']"));
+
+        public void ClickAddNewWidget()
+        {
+            _addNewWidgetButton.Click();
+        }
+
+        public void SelectOverallStatistics()
+        {
+            _overallStatisticsOption.Click();
+        }
+
+        public void ClickNextStep()
+        {
+            _nextStepButton.Click();
+        }
+
+        public void SelectDemoFilter()
+        {
+            _demoFilterOption.Click();
+        }
+
+        public void ConfirmWidgetAddition()
+        {
+            _addButton.Click();
+        }
+
+        public void EnterWidgetName(string name) 
+        { 
+            _widgetName.ClearField();
+            _widgetName.SendKeys(name);
+        }
+
+        public bool IsWidgetPresent(string widgetName)
+        {
+            return _driver.FindElements(By.XPath($"//div[text()='{widgetName}']")).Count > 0;
+        }
+
+        public void AddOverallStatisticsWidget(string name)
+        {
+            ClickAddNewWidget();
+            SelectOverallStatistics();
+            ClickNextStep();
+            SelectDemoFilter();
+            ClickNextStep();
+            EnterWidgetName(name);
+            ConfirmWidgetAddition();
+        }
+
+        public void DragAndDropFirstWidgetToSecondWidget()
+        {
+            _firstWidget.DragAndDropTo(_secondWidget);
+        }
+
+        public bool IsFirstWidgetBelowSecondWidget()
+        {
+            var firstWidgetLocation = _firstWidget.GetYLocation();
+            var secondWidgetLocation = _secondWidget.GetYLocation();
+            return firstWidgetLocation < secondWidgetLocation;
+        }
+
+        public void DeleteWidget(string widgetName)
+        {
+            _firstWidget.HoverOnElement();
+            _deleteWidgetButton.Click();
+            _confirmDeleteButton.Click();
+            _firstWidget.WaitUntilInvisible(2);
         }
     }
 }

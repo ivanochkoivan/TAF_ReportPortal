@@ -2,6 +2,7 @@
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
+using System.Xml.Linq;
 using TAF_ReportPortal_Configuration;
 
 public class CustomWebElement
@@ -19,7 +20,7 @@ public class CustomWebElement
 
     private void InitializeElement()
     {
-        WaitUntilVisible(5);
+        WaitUntiPresented(2);
         _element = _driver.FindElement(_locator);
     }
 
@@ -37,6 +38,19 @@ public class CustomWebElement
         Log($"Sending keys '{keys}' to element.");
     }
 
+    public void HoverOnElement()
+    {
+        Actions action = new Actions(_driver);
+        action.MoveToElement(_element).Perform();
+    }
+
+    public void ClearField()
+    {
+        InitializeElement();
+        _element.Clear();
+        Log($"Clear field");
+    }
+
     public string GetText()
     {
         InitializeElement();
@@ -48,6 +62,12 @@ public class CustomWebElement
     {
         WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(timeoutInSeconds));
         wait.Until(ExpectedConditions.ElementIsVisible(_locator));
+    }
+
+    public void WaitUntiPresented(int timeoutInSeconds)
+    {
+        WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(timeoutInSeconds));
+        wait.Until(ExpectedConditions.ElementExists(_locator));
     }
 
     public void WaitUntilClickable(int timeoutInSeconds)
@@ -118,5 +138,10 @@ public class CustomWebElement
     {
         IJavaScriptExecutor js = (IJavaScriptExecutor)_driver;
         js.ExecuteScript("arguments[0].click();", _element);
+    }
+
+    public int GetYLocation()
+    {
+        return _element.Location.Y;
     }
 }

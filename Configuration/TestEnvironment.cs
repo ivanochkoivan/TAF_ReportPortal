@@ -75,7 +75,7 @@ namespace TAF_ReportPortal_Configuration
             InitiateLogger();
             var webDriver = new ChromeDriver();
             TestEnvironment.Instance.InitializeWebDriver(webDriver);
-            webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);  // Імпліцитне очікування на 10 секунд
+            webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);
         }
 
         public void BeforeApiTests()

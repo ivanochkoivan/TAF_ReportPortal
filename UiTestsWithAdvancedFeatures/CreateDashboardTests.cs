@@ -1,17 +1,16 @@
 ﻿using NUnit.Framework;
-using NUnit;
 
 namespace TAF_ReportPortal_Tests_UiTestsWithAdvancedFeatures
 {
     [TestFixture]
-    public class DashboardTests : BaseTest
+    public class CreateDashboardTests : BaseTest
     {
-        private DashboardPage _dashboardPage;
+        private AllDashboardsPage _dashboardPage;
 
         [SetUp]
         public void SetUp()
         {
-            _dashboardPage = new DashboardPage(WebDriver);
+            _dashboardPage = new AllDashboardsPage(WebDriver);
         }
 
         [Test]
