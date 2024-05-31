@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using TAF_ReportPortal_Configuration.Utilities;
 
 namespace TAF_ReportPortal_Configuration
 {
@@ -27,5 +28,6 @@ namespace TAF_ReportPortal_Configuration
             string errorMessage = StringUtils.FormatMessage($"ERROR: {message}. Exception: {ex}");
             _logger.LogError(ex, errorMessage);
         }
+
     }
 }

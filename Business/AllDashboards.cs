@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.PageObjects;
-using TAF_ReportPortal_Configuration;
+using TAF_ReportPortal_Configuration.Utilities;
 
 namespace TAF_ReportPortal_Business
 {

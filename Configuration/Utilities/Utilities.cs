@@ -2,7 +2,7 @@
 using OpenQA.Selenium;
 using TechTalk.SpecFlow;
 
-namespace TAF_ReportPortal_Configuration
+namespace TAF_ReportPortal_Configuration.Utilities
 {
     public static class Utilities
     {

@@ -1,5 +1,5 @@
 ﻿using OpenQA.Selenium;
-using TAF_ReportPortal_Configuration;
+using TAF_ReportPortal_Configuration.Utilities;
 
 namespace TAF_ReportPortal_Business
 {
