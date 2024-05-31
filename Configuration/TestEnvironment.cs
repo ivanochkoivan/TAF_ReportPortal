@@ -22,6 +22,7 @@ namespace TAF_ReportPortal_Configuration
         public IWebDriver WebDriver { get; private set; }
         public TestConfiguration Config { get; }
         public Logger Logger { get; private set; }
+        public ScreenshotTaker ScreenshotTaker { get; private set; }
 
         private TestEnvironment() { 
             Config = InitializeConfiguration();
@@ -50,6 +51,12 @@ namespace TAF_ReportPortal_Configuration
         public void InitializeWebDriver(IWebDriver driver)
         {
             WebDriver = driver;
+
+            if (!Directory.Exists(Constatnt.screenshotsDirectory))
+            {
+                Directory.CreateDirectory(Constatnt.screenshotsDirectory);
+            }
+            ScreenshotTaker = new ScreenshotTaker(driver, Constatnt.screenshotsDirectory);
         }
 
         public void InitiateLogger()
@@ -67,7 +74,8 @@ namespace TAF_ReportPortal_Configuration
         {
             InitiateLogger();
             var webDriver = new ChromeDriver();
-            TestEnvironment.Instance.InitializeWebDriver(webDriver);       
+            TestEnvironment.Instance.InitializeWebDriver(webDriver);
+            webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);
         }
 
         public void BeforeApiTests()
