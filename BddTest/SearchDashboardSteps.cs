@@ -3,7 +3,7 @@ using TAF_ReportPortal_Business;
 using TAF_ReportPortal_Configuration;
 using TechTalk.SpecFlow;
 
-[assembly: Parallelizable(ParallelScope.Fixtures)]
+//[assembly: Parallelizable(ParallelScope.Fixtures)]
 namespace TAF_ReportPortal_BddTest
 {
     [Binding]
