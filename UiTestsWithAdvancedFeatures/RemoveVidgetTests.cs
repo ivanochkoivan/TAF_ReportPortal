@@ -3,6 +3,7 @@ using TAF_ReportPortal_Business.AdvancedFeature;
 
 namespace TAF_ReportPortal_Tests_UiTestsWithAdvancedFeatures
 {
+    [Allure.NUnit.AllureNUnit]
     public class RemoveVidgetTests : BaseTest
     {
         [Test]

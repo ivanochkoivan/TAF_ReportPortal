@@ -6,6 +6,7 @@ using TechTalk.SpecFlow;
 //[assembly: Parallelizable(ParallelScope.Fixtures)]
 namespace TAF_ReportPortal_BddTest
 {
+    [Allure.NUnit.AllureNUnit]
     [Binding]
     public class SearchDashboardSteps : BaseStep
     {

@@ -2,6 +2,7 @@
 
 namespace TAF_ReportPortal_Tests_UiTestsWithAdvancedFeatures
 {
+    [Allure.NUnit.AllureNUnit]
     [TestFixture]
     public class CreateDashboardTests : BaseTest
     {

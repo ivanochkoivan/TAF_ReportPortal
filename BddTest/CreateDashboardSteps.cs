@@ -6,6 +6,7 @@ using TechTalk.SpecFlow;
 
 namespace TAF_ReportPortal_BddTest
 {
+    [Allure.NUnit.AllureNUnit]
     [Binding]
     public class CreateDashboardSteps : BaseStep
     {
