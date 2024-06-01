@@ -7,7 +7,7 @@ namespace TAF_ReportPortal_Tests
 {
     [AllureNUnit]
     [TestFixture]
-    [Parallelizable(ParallelScope.Fixtures)]
+    //[Parallelizable(ParallelScope.Fixtures)]
     public class CreateDashboardTest : BaseTest
     {
         [TestCase("785785_Create", "!@#$%^&*()_AASSFFFfdfdf", true)]

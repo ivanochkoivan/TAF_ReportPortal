@@ -6,7 +6,7 @@ namespace TAF_ReportPortal_Tests
 {
     [AllureNUnit]
     [TestFixture]
-    [Parallelizable(ParallelScope.Fixtures)]
+    //[Parallelizable(ParallelScope.Fixtures)]
     public class UpdateDashboardTest : BaseTest
     {
         [TestCase("!HKF:LD<", "UpdatedDescription", true)]

@@ -76,6 +76,7 @@ namespace TAF_ReportPortal_Configuration
             var webDriver = new ChromeDriver();
             TestEnvironment.Instance.InitializeWebDriver(webDriver);
             webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);
+            webDriver.Manage().Window.Maximize();
         }
 
         public void BeforeApiTests()

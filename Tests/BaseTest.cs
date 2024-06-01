@@ -22,8 +22,8 @@ namespace TAF_ReportPortal_Tests
         public void BaseSetUp()
         {
             Logger = TestEnvironment.Instance.Logger;
-            Logger.Log("SetUp");
             TestEnvironment.Instance.BeforeUiTests();
+            Logger.Log("SetUp");           
             WebDriver = TestEnvironment.Instance.WebDriver;            
         }
         [TearDown]
