@@ -8,8 +8,8 @@ pipeline {
     }
 
     triggers {
-        cron('H H * * *') // Build periodically: HH * * * *
-        pollSCM('H/2 * * * *') // Poll SCM: H/2 * * * *
+        cron('H H * * *') // Build periodically
+        pollSCM('H/2 * * * *') // Poll SCM
     }
 
     environment {
@@ -28,7 +28,7 @@ pipeline {
             steps {
                 script {
                     def workDir = 'C:\\Users\\Ivan\\AppData\\Local\\Jenkins\\.jenkins\\workspace\\TAF_ReportPortal'
-                    bat "${DOTNET_SDK}/dotnet clean ${workDir} -c Debug"
+                    bat "${DOTNET_SDK}\\dotnet clean ${workDir} -c Debug"
                 }
             }
         }
@@ -37,7 +37,7 @@ pipeline {
             steps {
                 script {
                     def workDir = 'C:\\Users\\Ivan\\AppData\\Local\\Jenkins\\.jenkins\\workspace\\TAF_ReportPortal'
-                    bat "${DOTNET_SDK}/dotnet build ${workDir} -c Debug"
+                    bat "${DOTNET_SDK}\\dotnet build ${workDir} -c Debug"
                 }
             }
         }
@@ -46,7 +46,7 @@ pipeline {
             steps {
                 script {
                     def workDir = 'C:\\Users\\Ivan\\AppData\\Local\\Jenkins\\.jenkins\\workspace\\TAF_ReportPortal'
-                    bat "${DOTNET_SDK}/dotnet test ${workDir} -c Debug"
+                    bat "${DOTNET_SDK}\\dotnet test ${workDir} -c Debug"
                 }
             }
         }
@@ -54,15 +54,15 @@ pipeline {
 
     post {
         always {
-            allure([
-                results: [
-                    '**/Tests/bin/Debug/net8.0/allure-results',
-                    '**/APITests/bin/Debug/net8.0/allure-results',
-                    '**/BddTest/bin/Debug/net8.0/allure-results',
-                    '**/Tests.MsTests/bin/Debug/net8.0/allure-results',
-                    '**/UiTestsWithAdvancedFeatures/bin/Debug/net8.0/allure-results'
-                ]
-            ])
+            script {
+                allure([
+                    [path: '**/Tests/bin/Debug/net8.0/allure-results'],
+                    [path: '**/APITests/bin/Debug/net8.0/allure-results'],
+                    [path: '**/BddTest/bin/Debug/net8.0/allure-results'],
+                    [path: '**/Tests.MsTests/bin/Debug/net8.0/allure-results'],
+                    [path: '**/UiTestsWithAdvancedFeatures/bin/Debug/net8.0/allure-results']
+                ])
+            }
         }
     }
 }
