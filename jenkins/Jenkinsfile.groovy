@@ -24,14 +24,6 @@ pipeline {
             }
         }
 
-        stage('Stop Chromedriver Processes') {
-            steps {
-                script {
-                    bat 'taskkill /IM chromedriver.exe /F'
-                }
-            }
-        }
-
         stage('Clean') {
             steps {
                 script {
