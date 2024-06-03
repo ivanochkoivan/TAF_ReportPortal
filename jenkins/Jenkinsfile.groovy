@@ -27,7 +27,7 @@ pipeline {
         stage('Clean') {
             steps {
                 script {
-                    def workDir = 'C:\\Users\\Ivan\\AppData\\Local\\Jenkins\\.jenkins\\workspace\\TAF_ReportPortal'
+                    def workDir = 'C:\\Users\\Ivan\\AppData\\Local\\Jenkins\\.jenkins\\workspace\\TAF_ReportPortal_Pipeline'
                     bat "${DOTNET_SDK} clean ${workDir} -c Debug"
                 }
             }
@@ -36,7 +36,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    def workDir = 'C:\\Users\\Ivan\\AppData\\Local\\Jenkins\\.jenkins\\workspace\\TAF_ReportPortal'
+                    def workDir = 'C:\\Users\\Ivan\\AppData\\Local\\Jenkins\\.jenkins\\workspace\\TAF_ReportPortal_Pipeline'
                     bat "${DOTNET_SDK} build ${workDir} -c Debug"
                 }
             }
@@ -45,7 +45,7 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    def workDir = 'C:\\Users\\Ivan\\AppData\\Local\\Jenkins\\.jenkins\\workspace\\TAF_ReportPortal'
+                    def workDir = 'C:\\Users\\Ivan\\AppData\\Local\\Jenkins\\.jenkins\\workspace\\TAF_ReportPortal_Pipeline'
                     bat "${DOTNET_SDK} test ${workDir} -c Debug"
                 }
             }
