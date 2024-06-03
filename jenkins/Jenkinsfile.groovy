@@ -53,16 +53,17 @@ pipeline {
     }
 
     post {
-        always {
-            script {
-                allure([
-                    [path: '**/Tests/bin/Debug/net8.0/allure-results'],
-                    [path: '**/APITests/bin/Debug/net8.0/allure-results'],
-                    [path: '**/BddTest/bin/Debug/net8.0/allure-results'],
-                    [path: '**/Tests.MsTests/bin/Debug/net8.0/allure-results'],
-                    [path: '**/UiTestsWithAdvancedFeatures/bin/Debug/net8.0/allure-results']
-                ])
-            }
-        }
-    }
+		always {
+			script {
+				allure([
+					[path: 'C:\\Users\\Ivan\\AppData\\Local\\Jenkins\\.jenkins\\workspace\\TAF_ReportPortal_Pipeline\\Tests\\bin\\Debug\\net8.0\\allure-results'],
+					[path: 'C:\\Users\\Ivan\\AppData\\Local\\Jenkins\\.jenkins\\workspace\\TAF_ReportPortal_Pipeline\\APITests\\bin\\Debug\\net8.0\\allure-results'],
+					[path: 'C:\\Users\\Ivan\\AppData\\Local\\Jenkins\\.jenkins\\workspace\\TAF_ReportPortal_Pipeline\\BddTest\\bin\\Debug\\net8.0\\allure-results'],
+					[path: 'C:\\Users\\Ivan\\AppData\\Local\\Jenkins\\.jenkins\\workspace\\TAF_ReportPortal_Pipeline\\Tests.MsTests\\bin\\Debug\\net8.0\\allure-results'],
+					[path: 'C:\\Users\\Ivan\\AppData\\Local\\Jenkins\\.jenkins\\workspace\\TAF_ReportPortal_Pipeline\\UiTestsWithAdvancedFeatures\\bin\\Debug\\net8.0\\allure-results']
+				])
+			}
+		}
+	}
+	
 }
