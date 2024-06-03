@@ -55,14 +55,13 @@ pipeline {
     post {
         always {
             allure([
-                include: [
+                results: [
                     '**/Tests/bin/Debug/net8.0/allure-results',
                     '**/APITests/bin/Debug/net8.0/allure-results',
                     '**/BddTest/bin/Debug/net8.0/allure-results',
                     '**/Tests.MsTests/bin/Debug/net8.0/allure-results',
                     '**/UiTestsWithAdvancedFeatures/bin/Debug/net8.0/allure-results'
-                ],
-                disableResolvedScm: true
+                ]
             ])
         }
     }
