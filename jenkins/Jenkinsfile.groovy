@@ -20,7 +20,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/ivanochkoivan/TAF_ReportPortal.git', branch: '*/feature/module9'
+                git url: 'https://github.com/ivanochkoivan/TAF_ReportPortal.git', branch: 'feature/module9'
             }
         }
         
