@@ -14,7 +14,7 @@ pipeline {
 
     environment {
         DOTNET_ROOT = tool name: 'Net8_0'
-        DOTNET_SDK = "$DOTNET_ROOT"
+        DOTNET_SDK = "\"${DOTNET_ROOT}\\dotnet\""
     }
 
     stages {
@@ -23,12 +23,12 @@ pipeline {
                 git url: 'https://github.com/ivanochkoivan/TAF_ReportPortal.git', branch: 'feature/module9'
             }
         }
-        
+
         stage('Clean') {
             steps {
                 script {
                     def workDir = 'C:\\Users\\Ivan\\AppData\\Local\\Jenkins\\.jenkins\\workspace\\TAF_ReportPortal'
-                    bat "${DOTNET_SDK}\\dotnet clean ${workDir} -c Debug"
+                    bat "${DOTNET_SDK} clean ${workDir} -c Debug"
                 }
             }
         }
@@ -37,7 +37,7 @@ pipeline {
             steps {
                 script {
                     def workDir = 'C:\\Users\\Ivan\\AppData\\Local\\Jenkins\\.jenkins\\workspace\\TAF_ReportPortal'
-                    bat "${DOTNET_SDK}\\dotnet build ${workDir} -c Debug"
+                    bat "${DOTNET_SDK} build ${workDir} -c Debug"
                 }
             }
         }
@@ -46,7 +46,7 @@ pipeline {
             steps {
                 script {
                     def workDir = 'C:\\Users\\Ivan\\AppData\\Local\\Jenkins\\.jenkins\\workspace\\TAF_ReportPortal'
-                    bat "${DOTNET_SDK}\\dotnet test ${workDir} -c Debug"
+                    bat "${DOTNET_SDK} test ${workDir} -c Debug"
                 }
             }
         }
