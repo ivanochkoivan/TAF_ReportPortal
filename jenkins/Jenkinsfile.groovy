@@ -13,7 +13,7 @@ pipeline {
     }
 
     environment {
-        DOTNET_ROOT = tool name: 'dotnet-sdk'
+        DOTNET_ROOT = tool name: 'Net8.0'
         DOTNET_SDK = "$DOTNET_ROOT"
     }
 
