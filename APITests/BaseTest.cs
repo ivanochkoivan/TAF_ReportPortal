@@ -7,6 +7,18 @@ namespace TAF_ReportPortal_APITests
     {
         protected Logger? Logger { get; private set; }
 
+        [OneTimeSetUp]
+        public void SetupBeforeTestRun()
+        {
+            TestEnvironment.Instance.BeforeTestSuit();
+        }
+
+        [OneTimeTearDown]
+        public void AfterTestRun()
+        {
+            TestEnvironment.Instance.AfterTestSuit();
+        }
+
         [SetUp]
         public void BaseSetUp()
         {

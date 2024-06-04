@@ -19,6 +19,18 @@ namespace TAF_ReportPortal_Tests_UiTestsWithAdvancedFeatures
             WebDriver.Manage().Window.Maximize();
         }
 
+        [OneTimeSetUp]
+        public void SetupBeforeTestRun()
+        {
+            TestEnvironment.Instance.BeforeTestSuit();
+        }
+
+        [OneTimeTearDown]
+        public void AfterTestRun()
+        {
+            TestEnvironment.Instance.AfterTestSuit();
+        }
+
         [SetUp]
         public void BaseSetUp()
         {

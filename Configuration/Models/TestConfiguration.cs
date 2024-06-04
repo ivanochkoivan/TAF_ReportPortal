@@ -15,6 +15,7 @@
 
     public class TestConfiguration
     {
+        public string TeamsWebhookUrl {  get; set; }
         public string APIClient { get; set; }
         public APITestConfig ApiTestConfig { get; set; }
         public UITestConfig UiTestConfig { get; set; }
