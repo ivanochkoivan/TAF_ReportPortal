@@ -1,0 +1,23 @@
+﻿{
+	"enabled": true,
+	"server": {
+
+		"url": "http://localhost:8080",
+
+		"project": "superadmin_personal",
+
+		"apiKey": "VsKey_QNWe2dRfQyKGkBTDDndk8ZQYDb5ESKGUzcOwoap3HIKZJbh8-_0-ZLbh1LG_VGkO"
+
+	},
+	"launch": {
+
+		"name": ".NET Launch 2",
+
+		"description": "My awesome launch",
+
+		"debugMode": false,
+
+		"attributes": [ "tag1", "tag2", "platform:x64" ]
+
+	}
+}

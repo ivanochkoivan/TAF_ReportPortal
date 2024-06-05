@@ -6,3 +6,4 @@
         public const string screenshotsDirectory = "C:\\Users\\Ivan\\Documents";
     }
 }
+ 

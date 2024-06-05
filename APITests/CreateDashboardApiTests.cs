@@ -6,6 +6,7 @@ using TAF_ReportPortal_Configuration.Models;
 
 namespace TAF_ReportPortal_APITests
 {
+    [Allure.NUnit.AllureNUnit]
     public class CreateDashboardApiTests : BaseTest
     {      
         //Create a dashboard with valid data - check success status code
@@ -82,3 +83,4 @@ namespace TAF_ReportPortal_APITests
 
     }
 }
+ 

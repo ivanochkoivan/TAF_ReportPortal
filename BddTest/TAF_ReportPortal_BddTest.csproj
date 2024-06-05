@@ -8,10 +8,12 @@
 
   <ItemGroup>
     <PackageReference Include="Allure.Net.Commons" Version="2.12.0" />
+    <PackageReference Include="Allure.NUnit" Version="2.12.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
+    <PackageReference Include="NUnit.Console" Version="3.17.0" />
     <PackageReference Include="Selenium.WebDriver" Version="4.21.0" />
     <PackageReference Include="SpecFlow" Version="3.9.74" />
     <PackageReference Include="SpecFlow.NUnit" Version="3.9.74" />
@@ -21,6 +23,12 @@
   <ItemGroup>
     <ProjectReference Include="..\Business\TAF_ReportPortal_Business.csproj" />
     <ProjectReference Include="..\Configuration\TAF_ReportPortal_Configuration.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="C:\Users\Ivan\.nuget\packages\allure.net.commons\2.12.0\contentFiles\any\netstandard2.0\allureConfig.Template.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

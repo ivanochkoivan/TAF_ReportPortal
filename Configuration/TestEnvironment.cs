@@ -23,9 +23,11 @@ namespace TAF_ReportPortal_Configuration
         public TestConfiguration Config { get; }
         public Logger Logger { get; private set; }
         public ScreenshotTaker ScreenshotTaker { get; private set; }
+        public TeamsNotifier TeamsNotifier { get; private set; }
 
         private TestEnvironment() { 
             Config = InitializeConfiguration();
+            TeamsNotifier = new TeamsNotifier(Config.TeamsWebhookUrl);
         }
 
         private TestConfiguration InitializeConfiguration()
@@ -100,11 +102,22 @@ namespace TAF_ReportPortal_Configuration
             ApiClient = serviceProvider.GetService<IApiClient>();
         }
 
+        public void BeforeTestSuit() 
+        {
+            TeamsNotifier.SendTeamsMessage("Start Tests");
+        }
+        public void AfterTestSuit()
+        {
+            TeamsNotifier.SendTeamsMessage("Finish Tests");
+        }
+
         public void After()
         {
             // teardown HttpClient and WebDriver
             //TestEnvironment.Instance.HttpClient?.Dispose();
-
+            var jira = new JiraClient("https://xray.cloud.getxray.app", "B1EE1FAD7CE94F9EADDFDF4090EDCF32", "25875e29c14632c16a846def83591caf28f702f7ceaa3dcc3362842c870bce25");
+            var Testexport = new TestExportResult(jira);
+            Testexport.ExecuteAndImportResultsAsync().Wait();
             TestEnvironment.Instance.WebDriver?.Quit();
             TestEnvironment.Instance.WebDriver?.Dispose();
         }

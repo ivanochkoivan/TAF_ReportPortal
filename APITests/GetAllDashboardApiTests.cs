@@ -6,6 +6,7 @@ using TAF_ReportPortal_Configuration.Models;
 
 namespace TAF_ReportPortal_APITests
 {
+    [Allure.NUnit.AllureNUnit]
     public class GetAllDashboardApiTests : BaseTest
     {      
         //Get all dashboards with valid Project name - check success status code

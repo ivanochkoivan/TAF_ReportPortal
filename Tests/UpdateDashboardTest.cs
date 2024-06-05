@@ -4,7 +4,7 @@ using TAF_ReportPortal_Business;
 
 namespace TAF_ReportPortal_Tests
 {
-    [AllureNUnit]
+    [Allure.NUnit.AllureNUnit]
     [TestFixture]
     //[Parallelizable(ParallelScope.Fixtures)]
     public class UpdateDashboardTest : BaseTest
