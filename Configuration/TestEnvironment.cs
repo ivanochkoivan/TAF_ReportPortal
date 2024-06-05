@@ -115,6 +115,9 @@ namespace TAF_ReportPortal_Configuration
         {
             // teardown HttpClient and WebDriver
             //TestEnvironment.Instance.HttpClient?.Dispose();
+            var jira = new JiraClient("https://xray.cloud.getxray.app", "B1EE1FAD7CE94F9EADDFDF4090EDCF32", "25875e29c14632c16a846def83591caf28f702f7ceaa3dcc3362842c870bce25");
+            var Testexport = new TestExportResult(jira);
+            Testexport.ExecuteAndImportResultsAsync().Wait();
             TestEnvironment.Instance.WebDriver?.Quit();
             TestEnvironment.Instance.WebDriver?.Dispose();
         }
